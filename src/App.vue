@@ -23,26 +23,22 @@ async function fetchData() {
   try {
     const { data } = await nasaAPI.get(`/search?q=${inputValue.value}`)
     fetchedData.value = data.collection.items
-    console.log("🚀 ~ fetchData ~ data.collection.items:", data.collection.items)
+    console.log('🚀 ~ fetchData ~ data.collection.items:', data.collection.items)
   } catch (error) {
     throw error
   }
 }
 
 function handleSearch(e: string) {
-  inputValue.value = (e) as string
+  inputValue.value = e as string
   fetchData()
 }
-
-
-
-
 </script>
 
 <template>
   <PageHeader @handleSearch="handleSearch" />
   <ul>
-     <li v-for="(item, index) in fetchedData" :key="index">
+    <li v-for="(item, index) in fetchedData" :key="index">
       <img
         v-if="item.links?.[0]?.href"
         :src="item.links[0].href"
